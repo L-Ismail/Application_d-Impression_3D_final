@@ -1,0 +1,16 @@
+Pour acceder au site, il faut executer le fichier app.py dans un éditeur de code comme Visual Studio Code, 
+puis dans un terminal python, une adresse du type http://127.0.0.1:5000 (en cas d'erreur du type : app.py': [Errno 22] Invalid argument,
+entrer 'python app.py' dans le terminal python. 
+Une fois sur le site, vous pourrez créer un compte et/ou vous identifier, puis dans la page principal, deux objet 3D vous seront proposer,
+Nut_Job (sorte de vis en 3D) et Sliding Top Box, en cliquant dans 'Voir le produit', vous pourrez créer votre propre version
+du produit en le nommant à votre envie (attention à ne pas nommer deux fichier de la même manière,
+pensez bien à créer des libellés différents), puis diamètre de la tête permet de modifier le diamètre de la tête de la vis 3D 
+(paramètre head_diameter dans le fichier Nut_Job.scad), et Épaisseur de la paroi permet de modifier l'épaisseur des parois de la boite
+(paramètre wallThick dans sliding_top_box.scad). 
+
+Les informations sur les fichiers que vous aurez modifiés apparaîtront dans Panier et Compte. 
+Vous pourrez enfin vous déconnecter avec le bouton déconnexion.
+
+A noter que du fait d'une certaine procession lors de la modification des paramètres respectifs des objets, il faut attendre
+environ 1 min 45 s pour que votre fichier sliding_top_box*.scad soit téléchargé et plus de 2 min 50 s pour que votre fichier
+Nut Job*.scad soit télécharger. Tout ceci dépend de la complexité du fichier source (accessibles dans le dossier fichiers_3D).
