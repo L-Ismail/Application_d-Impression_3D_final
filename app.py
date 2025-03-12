@@ -18,6 +18,8 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100), unique=True, nullable=False)
     password = db.Column(db.String(200), nullable=False)
+    client_nom = db.Column(db.String(100), nullable=False)  # Add client name
+    adresse = db.Column(db.String(200), nullable=False)  # Add address
 
 class objet3d(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -49,6 +51,8 @@ class FichierModifie(db.Model):
     fichier_nom = db.Column(db.String(200), nullable=False)
     date_modification = db.Column(db.DateTime, default=db.func.current_timestamp())
     parametres = db.Column(db.Text, nullable=False)
+    date_commande = db.Column(db.DateTime, default=db.func.current_timestamp())
+    date_livraison = db.Column(db.DateTime, nullable=True)
 
 # Ajouter des paramètres spécifiques des fichiers .scad à la base de données
 def add_scad_files_to_db():
@@ -93,8 +97,10 @@ def register():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+        client_nom = request.form['client_nom']  # Get client name
+        adresse = request.form['adresse']  # Get address
         hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
-        new_user = User(username=username, password=hashed_password)
+        new_user = User(username=username, password=hashed_password, client_nom=client_nom, adresse=adresse)
         db.session.add(new_user)
         db.session.commit()
         flash('Registration successful! Please log in.', 'success')
@@ -123,12 +129,17 @@ def logout():
     flash('You have been logged out.', 'success')
     return redirect(url_for('index'))
 
-@app.route('/account')
+@app.route('/account', methods=['GET', 'POST'])
 def account():
     if 'user_id' not in session:
         flash('Please log in to access your account.', 'danger')
         return redirect(url_for('login'))
     user = User.query.get(session['user_id'])
+    if request.method == 'POST':
+        user.client_nom = request.form['client_nom']  # Update client name
+        user.adresse = request.form['adresse']  # Update address
+        db.session.commit()
+        flash('Account updated successfully!', 'success')
     fichiers_modifies = FichierModifie.query.filter_by(user_id=user.id).all()
     return render_template('account.html', user=user, fichiers_modifies=fichiers_modifies)
 
@@ -206,12 +217,17 @@ def modify_and_download(objet_id):
     new_scad_file_path = os.path.join(os.getcwd(), (new_libelle or 'modified') + '.scad')
     os.rename(modified_scad_path, new_scad_file_path)
 
+    date_commande = db.func.current_timestamp()
+    date_livraison = db.func.date(db.func.current_timestamp(), '+2 days')
+
     # Enregistrer les informations du fichier modifié
     if 'user_id' in session:
         fichier_modifie = FichierModifie(
             user_id=session['user_id'],
             fichier_nom=new_scad_file_path,
-            parametres=str(parametres_modifies)
+            parametres=str(parametres_modifies),
+            date_commande=date_commande,
+            date_livraison=date_livraison
         )
         db.session.add(fichier_modifie)
         db.session.commit()

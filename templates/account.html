@@ -50,16 +50,40 @@
     <div class="container mt-5">
         <h2>Mon Compte</h2>
         <p>Nom d'utilisateur: {{ user.username }}</p>
+        <form action="{{ url_for('account') }}" method="post">
+            <div class="form-group">
+                <label for="client_nom">Nom du client</label>
+                <input type="text" class="form-control" id="client_nom" name="client_nom" value="{{ user.client_nom }}" required>
+            </div>
+            <div class="form-group">
+                <label for="adresse">Adresse</label>
+                <input type="text" class="form-control" id="adresse" name="adresse" value="{{ user.adresse }}" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Mettre à jour</button>
+        </form>
         <h3>Fichiers Modifiés</h3>
-        <ul>
-            {% for fichier in fichiers_modifies %}
-            <li>
-                <strong>Nom du fichier:</strong> {{ fichier.fichier_nom }}<br>
-                <strong>Date de modification:</strong> {{ fichier.date_modification }}<br>
-                <strong>Paramètres modifiés:</strong> {{ fichier.parametres }}
-            </li>
-            {% endfor %}
-        </ul>
+        <table>
+            <thead>
+                <tr>
+                    <th>Fichier</th>
+                    <th>Date de Modification</th>
+                    <th>Date de Commande</th>
+                    <th>Date de Livraison</th>
+                    <th>Paramètres</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for fichier in fichiers_modifies %}
+                <tr>
+                    <td>{{ fichier.fichier_nom }}</td>
+                    <td>{{ fichier.date_modification }}</td>
+                    <td>{{ fichier.date_commande }}</td>
+                    <td>{{ fichier.date_livraison }}</td>
+                    <td>{{ fichier.parametres }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </body>
 </html>
