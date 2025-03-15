@@ -35,7 +35,7 @@ head_type              			= "hex";//[hex,socket,button,countersunk]
 //Drive type - Socket, Phillips, Slot (ignored for Hex head type and Rod)
 drive_type              		= "socket";//[socket,phillips,slot]
 //Distance between flats for the hex head or diameter for socket or button head (ignored for Rod)
-head_diameter = 22;
+head_diameter = 15.0;
 //Height of the head (ignored for Rod)
 head_height  					= 5;	
 //Diameter of drive type (ignored for Hex head and Rod)

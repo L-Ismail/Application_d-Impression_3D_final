@@ -3,10 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- J'ai inclus Bootstrap pour le style -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='esthetique.css') }}">
     <title>Panier</title>
 </head>
 <body>
+    <!-- J'ai utilisé la classe nav-bar de Bootstrap pour faire une barre de navigation -->
     <nav class="navbar navbar-expand-lg custom-color-navbar fixed-top">
         <a class="navbar-brand" href="{{ url_for('index') }}">
             <img src="{{ url_for('static', filename='images/the vision.png') }}" alt="MonLogo">
@@ -16,16 +19,7 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item dropdown">
-                    <a class="nav-link custom-nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Produits
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Produit 1</a>
-                        <a class="dropdown-item" href="#">Produit 2</a>
-                        <a class="dropdown-item" href="#">Produit 3</a>
-                    </div>
-                </li>
+                <!-- J'ai supprimé le menu déroulant 'produit' -->
                 <li class="nav-item">
                     <a class="nav-link custom-nav-link" href="{{ url_for('panier') }}">Panier</a>
                 </li>
@@ -48,7 +42,11 @@
         </div>
     </nav>
     <div class="container mt-5">
-        <h2>Mon Panier</h2>
+        <h2 id="typed-text">
+            <p class="text-uppercase font-weight-bold">
+                Mon Panier
+            </p>
+        </h2>
         <h3>Fichiers Modifiés</h3>
         <ul>
             {% for fichier in fichiers_modifies %}
@@ -59,6 +57,48 @@
             </li>
             {% endfor %}
         </ul>
+        
+        <!-- Section commentaire -->
+        <h3>Un problème avec votre commande? Contactez-nous.</h3>
+        <form id="comment-form">
+            <div class="form-group">
+                <label for="user_email">Email:</label>
+                <input type="email" class="form-control" id="user_email" name="user_email" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Commentaire:</label>
+                <textarea class="form-control" id="message" name="message" rows="3" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Envoyer</button>
+        </form>
+        
     </div>
+
+    <!-- J'ai inclus les scripts nécessaires pour Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <!-- J'ai inclus email.js pour envoyer les commentaires dans mon email personnelle -->
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+        (function(){
+            emailjs.init("4-Vqrr06dkia9CD3M");
+        })();
+    
+        document.getElementById('comment-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+    
+            emailjs.sendForm('service_y0jzbi8', 'template_1e3pl6e', this)
+                .then(function(response) {
+                    console.log("SUCCESS!", response.status, response.text);
+                    alert('Commentaire envoyé avec succès!');
+                }, function(error) {
+                    console.log("FAILED...", error);
+                    alert('Échec de l\'envoi du commentaire: ' + JSON.stringify(error));
+                });
+        });
+    </script>
+    
 </body>
 </html>

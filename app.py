@@ -6,20 +6,22 @@ import re
 import subprocess
 import shutil
 
+# J'ai initialisé l'application Flask
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'your_secret_key'
 
+# J'ai configuré SQLAlchemy pour la gestion de la base de données
 db = SQLAlchemy(app)
 
-# Modèles
+# Modèles de base de données
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100), unique=True, nullable=False)
     password = db.Column(db.String(200), nullable=False)
-    client_nom = db.Column(db.String(100), nullable=False)  # Add client name
-    adresse = db.Column(db.String(200), nullable=False)  # Add address
+    client_nom = db.Column(db.String(100), nullable=False)  # Nom du client
+    adresse = db.Column(db.String(200), nullable=False)  # Adresse du client
 
 class objet3d(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -54,7 +56,7 @@ class FichierModifie(db.Model):
     date_commande = db.Column(db.DateTime, default=db.func.current_timestamp())
     date_livraison = db.Column(db.DateTime, nullable=True)
 
-# Ajouter des paramètres spécifiques des fichiers .scad à la base de données
+# J'ai ajouté des paramètres spécifiques des fichiers .scad à la base de données
 def add_scad_files_to_db():
     scad_directory = os.path.join(os.getcwd(), 'fichiers_3D')
     param_pattern = re.compile(r'(\w+)\s*=\s*([\d.]+);')
@@ -97,8 +99,8 @@ def register():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        client_nom = request.form['client_nom']  # Get client name
-        adresse = request.form['adresse']  # Get address
+        client_nom = request.form['client_nom']  # Nom du client
+        adresse = request.form['adresse']  # Adresse du client
         hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
         new_user = User(username=username, password=hashed_password, client_nom=client_nom, adresse=adresse)
         db.session.add(new_user)
@@ -136,8 +138,8 @@ def account():
         return redirect(url_for('login'))
     user = User.query.get(session['user_id'])
     if request.method == 'POST':
-        user.client_nom = request.form['client_nom']  # Update client name
-        user.adresse = request.form['adresse']  # Update address
+        user.client_nom = request.form['client_nom']  # Mettre à jour le nom du client
+        user.adresse = request.form['adresse']  # Mettre à jour l'adresse
         db.session.commit()
         flash('Account updated successfully!', 'success')
     fichiers_modifies = FichierModifie.query.filter_by(user_id=user.id).all()
@@ -236,6 +238,6 @@ def modify_and_download(objet_id):
 
 if __name__ == '__main__':
     with app.app_context():
-        db.create_all()  # Ensure tables are created first
+        db.create_all()  # J'ai créé les tables de la base de données
         add_scad_files_to_db()
     app.run(debug=True)

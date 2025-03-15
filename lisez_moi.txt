@@ -1,6 +1,9 @@
+Pré-requis: Un interprétateur python et javascript
+Bibliothèques à installer: Flask, Flask SQL_Alchemy
+
 Pour acceder au site, il faut executer le fichier app.py dans un éditeur de code comme Visual Studio Code, 
 puis dans un terminal python, une adresse du type http://127.0.0.1:5000 (en cas d'erreur du type : app.py': [Errno 22] Invalid argument,
-entrer 'python app.py' dans le terminal python. 
+entrer 'python app.py' dans le terminal python). 
 Une fois sur le site, vous pourrez créer un compte et/ou vous identifier, puis dans la page principal, deux objet 3D vous seront proposer,
 Nut_Job (sorte de vis en 3D) et Sliding Top Box, en cliquant dans 'Voir le produit', vous pourrez créer votre propre version
 du produit en le nommant à votre envie (attention à ne pas nommer deux fichier de la même manière,
@@ -14,3 +17,35 @@ Vous pourrez enfin vous déconnecter avec le bouton déconnexion.
 A noter que du fait d'une certaine procession lors de la modification des paramètres respectifs des objets, il faut attendre
 environ 1 min 45 s pour que votre fichier sliding_top_box*.scad soit téléchargé et plus de 2 min 50 s pour que votre fichier
 Nut Job*.scad soit télécharger. Tout ceci dépend de la complexité du fichier source (accessibles dans le dossier fichiers_3D).
+
+Une fois fait, vous aurez un fichier .scad qui pourra être ouvert par l'application OpenScad. Il faudra alors faire un "rendering" de l'application.
+Puis vous pourrez alors imprimer le tout sur votre imprimante personnelle.
+
+Descriptif des répertoires :
+ 
+I.templates : Contient les fichiers HTML utilisés pour rendre les pages web de l'application.Fichiers principaux :
+		
+	a.index.html : Page d'accueil de l'application.
+	b.login.html : Page de connexion pour les utilisateurs.
+	c.register.html : Page d'inscription pour les nouveaux utilisateurs.
+	d.account.html : Page de gestion du compte utilisateur.
+	e.panier.html : Page du panier où les utilisateurs peuvent voir leurs fichiers modifiés.
+	f.product.html : Page de détail d'un produit spécifique.
+
+II.static : Contient les fichiers statiques tels que les fichiers CSS, les images et les scripts JavaScript. Fichiers principaux :
+
+	a.esthetique.css : Fichier CSS principal pour le style de l'application.
+
+III.fichiers_3D : Contient les fichiers SCAD utilisés pour l'impression 3D. Fichiers principaux :
+
+
+	a.Nut_Job.scad : Fichier SCAD pour le produit "Nut Job".
+	b.sliding_top_box.scad : Fichier SCAD pour le produit "Sliding Top Box".
+
+IV."Autres":
+
+
+	a.app.py: Fichier principal de l'application Flask. Il contient les routes, les modèles de base de données et la logique de l'application.
+	b.database.db : Fichier de base de données SQLite utilisé pour stocker les informations des utilisateurs, des produits et des commandes.
+
+

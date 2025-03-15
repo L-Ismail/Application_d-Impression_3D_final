@@ -1,0 +1,12 @@
+Pour les élèves de l'année prochaine; vous devrez:
+
+-Optimiser le temps de processions des fichiers .scad
+-Ajouter des paramètres à modifier
+-Ajouter des bibliothèques js pour améliorer l'affichage
+-Optimiser l'agencement des éléments graphiques sur la page index.html, pour une meilleure expérience utilisateur
+-Ajouter éventuellement d'autres fichiers 3D.
+-Si possible, lancer en ligne l'application en l'hébergeant sur un serveur externe
+-Ajouter la possibilité de faire des transaction (acheter les produits), et donc d'ajouter une table 'Prix' afin de modifier
+la base de donnée (attention à bien supprimer la base de donnée existante alors, ou bien utiliser l'extension js "migrate",
+ce qui est plus compliqué).
+-Adapté la date de livraison en fonction de l'adresse rentré (utiliser éventuellement leaflet.js)
