@@ -28,6 +28,7 @@ class objet3d(db.Model):
     libelle = db.Column(db.String(100), nullable=False)
     description = db.Column(db.Text, nullable=False)
     chemin_fichier = db.Column(db.String(200), nullable=False)
+    original_name = db.Column(db.String(100), nullable=False)  # Ajout du nom original
 
 class Parametre(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -70,7 +71,7 @@ def add_scad_files_to_db():
             libelle = filename.replace('.scad', '').replace('_', ' ').title()
             description = f"Fichier 3D pour {libelle}"
             if not objet3d.query.filter_by(chemin_fichier=chemin_fichier).first():
-                new_product = objet3d(libelle=libelle, description=description, chemin_fichier=chemin_fichier)
+                new_product = objet3d(libelle=libelle, description=description, chemin_fichier=chemin_fichier, original_name=filename)
                 db.session.add(new_product)
                 db.session.commit()
                 with open(chemin_fichier, 'r') as file:
@@ -161,6 +162,7 @@ def product(objet_id):
     product_data = {
         "id": product.id,
         "name": product.libelle,
+        "original_name": product.original_name,
         "image": "lunettes.png",  # Remplace par product.chemin_fichier si c'est le vrai chemin
         "description": product.description,
         "params": params

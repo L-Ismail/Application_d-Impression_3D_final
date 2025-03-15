@@ -46,11 +46,17 @@
     <div class="container my-5">
         <div class="row">
             <div class="col-md-8">
-                <h1 class="product">{{ product.name }}</h1>
+                <h1 class="product">
+                    {% if 'username' in session %}
+                        {{ product.name }}
+                    {% else %}
+                        {{ product.original_name }}
+                    {% endif %}
+                </h1>
                 <div class="product-image mb-3">
-                    {% if 'Nut_Job' in product.name or 'Nut Job' in product.name %}
+                    {% if 'Nut_Job' in product.original_name or 'Nut Job' in product.original_name %}
                     <img class="imageproduit" src="{{ url_for('static', filename='images/st54.png') }}" alt="{{ product.name }}" class="img-fluid">
-                    {% elif 'Sliding_Top_Box' in product.name or 'Sliding Top Box' in product.name %}
+                    {% elif 'Sliding_Top_Box' in product.original_name or 'Sliding Top Box' in product.original_name %}
                     <img class="imageproduit" src="{{ url_for('static', filename='images/st55.png') }}" alt="{{ product.name }}" class="img-fluid">
                     {% endif %}
                 </div>
