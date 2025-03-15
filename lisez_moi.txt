@@ -48,4 +48,27 @@ IV."Autres":
 	a.app.py: Fichier principal de l'application Flask. Il contient les routes, les modèles de base de données et la logique de l'application.
 	b.database.db : Fichier de base de données SQLite utilisé pour stocker les informations des utilisateurs, des produits et des commandes.
 
+Diagramme visuel:
+
+Application_d'Impression_3D_final/
+├── templates/
+│   ├── index.html
+│   ├── login.html
+│   ├── register.html
+│   ├── account.html
+│   ├── panier.html
+│   ├── product.html
+├── static/
+│   ├── esthetique.css
+│   ├── images/
+│       ├── the vision.png
+│       ├── st54.png
+│       ├── st55.png
+├── fichiers_3D/
+│   ├── Nut_Job.scad
+│   ├── sliding_top_box.scad
+├── app.py
+├── app2.py (fichier test pour aider à tester les fonctionnalités flask , gardé pour les futurs étudiants afin de tester des fonctionnalités)
+├── database.db
+
 
