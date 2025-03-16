@@ -8,7 +8,7 @@ body {
 
 /* J'ai défini le style pour les titres */
 h1, h2, h3 {
-    color: #080808;
+    color: #333;
     text-align: center;
     margin-top: 20px;
 }
@@ -62,17 +62,17 @@ form {
 
 .card-text {
     font-size: 0.9em;
-    color: #000000;
+    color: #666;
 }
 
 .btn-primary {
-    background-color: #D2D4C8;
+    background-color: #007bff;
     border: none;
     transition: background 0.3s;
 }
 
 .btn-primary:hover {
-    background-color: #D2D4C8;
+    background-color: #0056b3;
 }
 
 /* J'ai défini le style pour les conteneurs */
@@ -86,7 +86,7 @@ form {
 
 .container p {
     font-size: 1.1em;
-    color: #000000;
+    color: #555;
 }
 
 /* J'ai défini le style pour les images de produits */
@@ -116,81 +116,3 @@ th {
 td {
     background-color: white;
 }
-
-/* Partie Account */ 
-
- /* Définition de la couleur de fond et du texte principal */
- body {
-    background-color: white;
-    padding-top: 80px;
-    color: #000000;
-}
-
-/* Conteneur principal avec une apparence douce */
-.container {
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
-}
-/* Style des titres */
-h2, h3 {
-    color: #000000;
-    font-weight: bold;
-    text-align: center;
-}
-/* Style du tableau */
-table {
-    width: 100%;
-    margin-top: 20px;
-}
-th, td {
-    text-align: center;
-    padding: 10px;
-    border-bottom: 1px solid #D2D4C8;
-}
-th {
-    background-color: #D2D4C8;
-    color: white;
-}
-/* Style du bouton principal avec effet au survol */
-button.btn-primary {
-    background-color: #D2D4C8;
-    border: none;
-    transition: 0.3s;
-}
-button.btn-primary:hover {
-    background-color: #f5e6ca;
-}
-
-/* Navbar */
-.custom-color-navbar {
-    background-color: #D2D4C8 !important;
-    padding: 10px 20px; /* Réduction de la hauteur */
-    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1); /* Légère ombre pour du relief */
-}
-
-.navbar-brand img {
-    height: 100%; /* Ajustement de la taille du logo pour remplir la hauteur de la barre */
-    max-height: 60px; /* Limite la hauteur maximale du logo */
-    width: auto; /* Ajustement de la largeur en conséquence */
-}
-
-.custom-nav-link {
-    color: #000000 !important;
-    font-weight: bold;
-    padding: 8px 15px; /* Suppression des blocs autour des mots */
-    transition: color 0.3s ease-in-out;
-}
-
-.custom-nav-link:hover {
-    color: #000000 !important;
-    background: none !important; /* Suppression des effets de fond */
-}
-
-.navbar-nav .nav-item {
-    margin: 0 8px; /* Espacement uniforme entre les liens */
-}
-/* Partie login */
-
-

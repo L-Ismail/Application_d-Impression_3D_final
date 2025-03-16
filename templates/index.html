@@ -14,7 +14,7 @@
 <!-- J'ai utilisé la classe nav-bar de Bootstrap pour faire une barre de navigation -->
 <nav class="navbar navbar-expand-lg custom-color-navbar fixed-top">
     <a class="navbar-brand" href="#">
-        <img src="{{ url_for('static', filename='images/the vision.png') }}" alt="MonLogo">
+        <img src="{{ url_for('static', filename='images/Personnalisation.png') }}" alt="MonLogo">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -56,7 +56,11 @@
         {% for product in objets %}
         <div class="col-md-4">
             <div class="card mb-4">
-                <img class="card-img-top" src="{{ url_for('static', filename='images/' + product.chemin_fichier) }}" alt="{{ product.libelle }}">
+                {% if 'Nut_Job' in product.libelle or 'Nut Job' in product.libelle %}
+                <img class="card-img-top" src="{{ url_for('static', filename='images/st54.png') }}" alt="{{ product.libelle }}">
+                {% elif 'sliding_top_box' in product.libelle or 'Sliding Top Box' in product.libelle %}
+                <img class="card-img-top" src="{{ url_for('static', filename='images/st55.png') }}" alt="{{ product.libelle }}">
+                {% endif %}
                 <div class="card-body">
                     <h5 class="card-title">{{ product.libelle }}</h5>
                     <p class="card-text">{{ product.description }}</p>
